@@ -10,8 +10,13 @@
 @media (prefers-color-scheme:dark){:root{--bg:#191917;--fg:#ecebe6;--mut:#a09f98;--line:#363632;--card:#22221f;--acc:#7cc4ab}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 "Hiragino Sans","Noto Sans JP",system-ui,sans-serif}
-main{max-width:720px;margin:0 auto;padding:40px 16px 64px}
-h1{font-size:24px;line-height:1.4;margin:0 0 8px}
+main{max-width:720px;margin:0 auto;padding:88px 16px 64px}
+@media (max-width:480px){main{padding-top:64px}}
+h1{font-size:28px;line-height:1.35;margin:0 0 28px}
+h1 span{display:block;font-size:17px;font-weight:600;color:var(--mut);margin-top:6px}
+.hero{padding-bottom:16px}
+.hero p{margin:0 0 14px;line-height:1.9}
+.eyebrow{color:var(--acc);font-weight:600;font-size:14px;letter-spacing:.04em;margin:0 0 10px!important}
 h2{font-size:18px;margin:48px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 h3{font-size:16px;margin:0 0 6px}
 p{margin:0 0 12px}
@@ -45,8 +50,12 @@ footer{margin-top:48px;font-size:14px;color:var(--mut)}
 <body>
 <main>
 
-<h1>千葉嵩太 — これまで作ったもの</h1>
-<p class="lead">不動産会社でITを担当しています。紙・バラバラ・手作業で溜まっているデータを、プログラミングとAIで「検索できる・集計できる・自動で回る」形に変えてきました。研究のデータ作業（アンケート・史料・インタビュー・画像・実験ログなど）でも、やることは同じです。</p>
+<header class="hero">
+<h1>千葉嵩太<span>研究のデータ作業をお手伝いします</span></h1>
+<p>不動産会社でITを担当しています。</p>
+<p>紙・バラバラ・手作業で溜まっているデータを、プログラミングとAIで<br><strong>「検索できる・集計できる・自動で回る」</strong>形に変えてきました。</p>
+<p>研究のデータ作業<br>（アンケート・史料・インタビュー・画像・実験ログなど）でも、<br>やることは同じです。</p>
+</header>
 
 <h2>これまで作ったもの</h2>
 

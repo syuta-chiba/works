@@ -140,5 +140,15 @@ footer{margin-top:48px;font-size:14px;color:var(--mut)}
 
 <footer>最終更新: 2026年11月</footer>
 </main>
+<script>
+/* メールのリンク(?r=目印)から開かれたことを記録する。目印は相手ごとの記号で、名前やアドレスは含まない */
+(function(){try{
+ var q=new URLSearchParams(location.search),r=(q.get('r')||'').replace(/[^0-9a-f]/g,'').slice(0,10);
+ if(r){try{sessionStorage.setItem('r',r)}catch(e){} history.replaceState(null,'',location.pathname)}
+ else{try{r=sessionStorage.getItem('r')||''}catch(e){}}
+ try{if(sessionStorage.getItem('v'))return;sessionStorage.setItem('v','1')}catch(e){}
+ new Image().src='https://160-251-215-139.sslip.io/lab/v?p=works&r='+r+'&t='+Date.now();
+}catch(e){}})();
+</script>
 </body>
 </html>

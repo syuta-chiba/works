@@ -16,6 +16,7 @@ p{margin:0 0 14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
 button{font:inherit;font-size:16px;padding:12px 20px;border-radius:8px;border:0;background:var(--acc);color:#fff;cursor:pointer;width:100%}
 button:disabled{opacity:.5}
+button.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
 .muted{color:var(--mut);font-size:14px}
 a{color:var(--acc)}
 </style>
@@ -25,8 +26,13 @@ a{color:var(--acc)}
 <h1>今後のご連絡の停止</h1>
 <div class="card" id="box">
 <p>研究のデータ作業のお手伝いの件で、千葉嵩太からお送りしたメールについて、今後のご連絡を停止します。</p>
-<p>よろしければ、下のボタンを押してください。押した時点で、以後は一切お送りしません。</p>
-<button id="btn" onclick="stop()">今後のご連絡を停止する</button>
+<p>よろしければ、下のボタンを押してください。確認のあと停止し、以後は一切お送りしません。</p>
+<button id="btn" onclick="ask()">今後のご連絡を停止する</button>
+<div id="confirm" hidden>
+<p style="margin-top:4px"><b>本当に停止しますか？</b><br><span class="muted">停止すると、今後こちらからご連絡することはありません。</span></p>
+<button id="yes" onclick="stop()">はい、停止します</button>
+<button class="ghost" onclick="cancel()" style="margin-top:8px">やめる</button>
+</div>
 <p class="muted" id="msg" style="margin-top:12px"></p>
 </div>
 <p class="muted" style="margin-top:20px">ボタンがうまく動かない場合は、お送りしたメールに「不要」とひと言ご返信いただくだけでも停止します。<br>
@@ -35,8 +41,10 @@ a{color:var(--acc)}
 <script>
 var r=(new URLSearchParams(location.search).get('r')||'').replace(/[^0-9a-f]/g,'').slice(0,10);
 if(!r){document.getElementById('btn').disabled=true;document.getElementById('msg').textContent='このページはメールのリンクから開いてください（またはメールにご返信ください）。'}
+function ask(){document.getElementById('btn').hidden=true;document.getElementById('confirm').hidden=false;}
+function cancel(){document.getElementById('btn').hidden=false;document.getElementById('confirm').hidden=true;document.getElementById('msg').textContent='';}
 function stop(){
-  var b=document.getElementById('btn'),m=document.getElementById('msg');b.disabled=true;m.textContent='送信中…';
+  var b=document.getElementById('yes'),m=document.getElementById('msg');b.disabled=true;m.textContent='送信中…';
   fetch('https://160-251-215-139.sslip.io/lab/u',{method:'POST',headers:{'Content-Type':'text/plain'},body:r})
    .then(function(x){if(!x.ok)throw 0;document.getElementById('box').innerHTML='<p><b>停止しました。</b></p><p>今後、こちらからご連絡することはありません。ご対応いただきありがとうございました。</p>';})
    .catch(function(){b.disabled=false;m.textContent='うまく届きませんでした。お手数ですが、メールに「不要」とご返信ください。';});

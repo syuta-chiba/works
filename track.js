@@ -43,11 +43,11 @@
     last = now;
     [10, 30, 60, 180].forEach(function (s) { if (shown >= s * 1000) send('sec' + s); });
   }, 2000);
-  /* どの欄が読まれたか(data-sec が画面の半分以上に出た) */
+  /* どの欄が読まれたか(data-sec の欄までスクロールした) */
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) send('sec:' + e.target.getAttribute('data-sec')); });
-    }, { threshold: 0.5 });
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 0 });   /* 欄の上端が画面の 6 割の位置まで来たら(縦に長い欄でも数えられるように) */
     window.__observe = function (el) { io.observe(el); };
     document.querySelectorAll('[data-sec]').forEach(function (el) { io.observe(el); });
   }

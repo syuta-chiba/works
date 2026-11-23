@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja" data-page="proposal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>研究のデータ作業のご提案 — 千葉嵩太</title>
+<style>
+:root{--bg:#fafaf8;--fg:#1f1f1c;--mut:#66665f;--line:#e4e3dc;--card:#fff;--acc:#2f6f5e}
+@media (prefers-color-scheme:dark){:root{--bg:#191917;--fg:#ecebe6;--mut:#a09f98;--line:#363632;--card:#22221f;--acc:#7cc4ab}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.85 "Hiragino Sans","Noto Sans JP",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:72px 16px 64px}
+@media (max-width:480px){main{padding-top:52px}}
+.to{color:var(--acc);font-weight:600;font-size:14px;margin:0 0 8px}
+h1{font-size:24px;line-height:1.45;margin:0 0 22px}
+h2{font-size:17px;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+p{margin:0 0 12px}
+.muted{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.card h3{font-size:16px;margin:0 0 10px;line-height:1.5}
+.card h3 .n{color:var(--acc);margin-right:6px}
+dl{margin:0;display:grid;grid-template-columns:7.2em 1fr;gap:6px 10px;font-size:15px}
+dt{color:var(--mut)} dd{margin:0}
+dt.keep{color:var(--acc);font-weight:600}
+.cta{background:var(--card);border:1px solid var(--acc);border-radius:12px;padding:18px;margin-top:32px}
+.btn{display:inline-block;font:inherit;font-size:15px;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 0 0;border:1px solid var(--line);color:var(--fg);background:var(--card)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+a{color:var(--acc)}
+footer{margin-top:40px;font-size:13px;color:var(--mut)}
+@media (max-width:480px){dl{grid-template-columns:1fr;gap:0 0}dd{margin-bottom:8px}}
+</style>
+</head>
+<body>
+<main id="main">
+<p class="muted" id="loading">読み込み中…</p>
+</main>
+<script src="track.js"></script>
+<script>
+(function(){
+ var r=window.__rid||'', main=document.getElementById('main');
+ function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+ function fail(){main.innerHTML='<h1>研究のデータ作業のご提案</h1><p>このページはメールのリンクから開いてください。</p><p><a href="./" data-t="works">これまで作ったものはこちら</a></p>';}
+ if(!r){fail();return}
+ fetch('https://160-251-215-139.sslip.io/lab/p?r='+r).then(function(x){if(!x.ok)throw 0;return x.json()}).then(function(d){
+  var ideas=d.ideas.map(function(i,k){return '<div class="card" data-sec="idea'+(k+1)+'"><h3><span class="n">'+(k+1)+'</span>'+esc(i.title)+'</h3><dl>'
+   +'<dt>いまの手間</dt><dd>'+esc(i.now)+'</dd><dt>軽くする方法</dt><dd>'+esc(i.how)+'</dd>'
+   +'<dt class="keep">先生が判断</dt><dd>'+esc(i.keep)+'</dd><dt>ご用意いただくもの</dt><dd>'+esc(i.need)+'</dd>'
+   +'<dt>小さく試すなら</dt><dd>'+esc(i.size)+'</dd></dl></div>'}).join('');
+  main.innerHTML='<p class="to">'+esc(d.name)+' 先生（'+esc(d.university)+'）へ</p>'
+   +'<h1>'+esc(d.headline)+'</h1>'
+   +'<div data-sec="understanding"><h2>先生の研究について、私が理解したこと</h2><p>'+esc(d.understanding)+'</p></div>'
+   +'<h2 data-sec="ideas">お手伝いできそうな作業（3つの案）</h2>'+ideas
+   +'<p class="muted">'+esc(d.note)+'</p>'
+   +'<div class="cta" data-sec="cta"><p><b>どれか近いものがあれば、お送りしたメールにひと言ご返信ください。</b><br>「2番が近い」「別の作業で困っている」など、まとまっていなくても大丈夫です。</p>'
+   +'<a class="btn primary" data-t="mailto" href="mailto:chiba.shuta.re@gmail.com?subject='+encodeURIComponent('Re: 研究のデータ作業のお手伝いについて')+'">メールで返信する</a>'
+   +'<a class="btn" data-t="works" href="./">これまで作ったものを見る</a></div>'
+   +'<footer>千葉嵩太 ／ chiba.shuta.re@gmail.com<br>これは先生の公開情報（researchmap）から想像で書いた試案です。今後のご連絡が不要でしたら <a data-t="stop" href="stop.html">こちら</a>。</footer>';
+  document.title=d.name+' 先生へのご提案 — 千葉嵩太';
+  main.querySelectorAll('a[href]').forEach(function(a){var h=a.getAttribute('href');if(h.indexOf('://')<0&&h.indexOf('mailto:')!==0)a.setAttribute('href',h+(h.indexOf('?')<0?'?':'&')+'r='+r)});
+  if(window.__observe)main.querySelectorAll('[data-sec]').forEach(window.__observe);
+ }).catch(fail);
+})();
+</script>
+</body>
+</html>

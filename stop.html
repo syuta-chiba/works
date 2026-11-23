@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-page="stop">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,10 +27,10 @@ a{color:var(--acc)}
 <div class="card" id="box">
 <p>研究のデータ作業のお手伝いの件で、千葉嵩太からお送りしたメールについて、今後のご連絡を停止します。</p>
 <p>よろしければ、下のボタンを押してください。確認のあと停止し、以後は一切お送りしません。</p>
-<button id="btn" onclick="ask()">今後のご連絡を停止する</button>
+<button id="btn" data-t="stop1" onclick="ask()">今後のご連絡を停止する</button>
 <div id="confirm" hidden>
 <p style="margin-top:4px"><b>本当に停止しますか？</b><br><span class="muted">停止すると、今後こちらからご連絡することはありません。</span></p>
-<button id="yes" onclick="stop()">はい、停止します</button>
+<button id="yes" data-t="stop2" onclick="stop()">はい、停止します</button>
 <button class="ghost" onclick="cancel()" style="margin-top:8px">やめる</button>
 </div>
 <p class="muted" id="msg" style="margin-top:12px"></p>
@@ -38,6 +38,7 @@ a{color:var(--acc)}
 <p class="muted" style="margin-top:20px">ボタンがうまく動かない場合は、お送りしたメールに「不要」とひと言ご返信いただくだけでも停止します。<br>
 ご迷惑をおかけし、失礼いたしました。</p>
 </main>
+<script src="track.js"></script>
 <script>
 var r=(new URLSearchParams(location.search).get('r')||'').replace(/[^0-9a-f]/g,'').slice(0,10);
 if(!r){document.getElementById('btn').disabled=true;document.getElementById('msg').textContent='このページはメールのリンクから開いてください（またはメールにご返信ください）。'}

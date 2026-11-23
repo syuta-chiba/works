@@ -10,7 +10,9 @@
     if (r) { sessionStorage.setItem('r', r); } else { r = sessionStorage.getItem('r') || ''; }
   } catch (e) {}
   window.__rid = r;
+  var preview = /[?&]preview=1/.test(location.search);   /* 管理画面からの確認用。数えない */
   function send(ev) {
+    if (preview) return;
     try {
       var k = 'v:' + page + ':' + ev;
       if (sessionStorage.getItem(k)) return;
@@ -23,7 +25,7 @@
   /* 同じサイト内のリンクに目印を引き継ぐ(回遊も同じ人として数える) */
   document.querySelectorAll('a[href]').forEach(function (a) {
     var h = a.getAttribute('href');
-    if (r && h && h.indexOf('://') < 0 && h.indexOf('mailto:') !== 0 && h.charAt(0) !== '#') {
+    if (r && !preview && h && h.indexOf('://') < 0 && h.indexOf('mailto:') !== 0 && h.charAt(0) !== '#') {
       a.setAttribute('href', h + (h.indexOf('?') < 0 ? '?' : '&') + 'r=' + r);
     }
   });

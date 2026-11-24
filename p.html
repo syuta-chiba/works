@@ -21,7 +21,7 @@ p{margin:0 0 12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 20px 22px;margin:18px 0}
 .card h3{font-size:16px;margin:0 0 16px;line-height:1.5}
 .card h3 .n{color:var(--acc);margin-right:6px}
-dl{margin:0;display:grid;grid-template-columns:7.2em 1fr;gap:14px 12px;font-size:15px}
+dl{margin:0;display:grid;grid-template-columns:8.5em 1fr;gap:14px 12px;font-size:15px}
 dt{color:var(--mut)} dd{margin:0}
 dt.keep{color:var(--acc);font-weight:600}
 .cta{background:var(--card);border:1px solid var(--acc);border-radius:12px;padding:18px;margin-top:32px}
@@ -47,13 +47,13 @@ footer{margin-top:40px;font-size:13px;color:var(--mut)}
   var ideas=d.ideas.map(function(i,k){return '<div class="card" data-sec="idea'+(k+1)+'"><h3><span class="n">'+(k+1)+'</span>'+esc(i.title)+'</h3><dl>'
    +'<dt>いまの手間</dt><dd>'+esc(i.now)+'</dd><dt>軽くする方法</dt><dd>'+esc(i.how)+'</dd>'
    +'<dt class="keep">先生が判断</dt><dd>'+esc(i.keep)+'</dd><dt>ご用意いただくもの</dt><dd>'+esc(i.need)+'</dd>'
-   +'<dt>小さく試すなら</dt><dd>'+esc(i.size)+'</dd></dl></div>'}).join('');
+   +'<dt class="keep">まず小さく頼むなら（無料・即日）</dt><dd>'+esc(i.size)+'</dd></dl></div>'}).join('');
   main.innerHTML='<p class="to">'+esc(d.university)+'　'+esc(d.name)+' 先生</p>'
    +'<h1>'+esc(d.headline)+'</h1>'
    +'<div data-sec="understanding"><h2>先生の研究について、私が理解したこと</h2><p>'+esc(d.understanding)+'</p></div>'
    +'<h2 data-sec="ideas">お手伝いできそうな作業（3つの案）</h2>'+ideas
    +'<p class="muted">'+esc(d.note)+'</p>'
-   +'<div class="cta" data-sec="cta"><p><b>どれか近いものがあれば、お送りしたメールにひと言ご返信ください。</b><br>「2番が近い」「別の作業で困っている」など、まとまっていなくても大丈夫です。</p>'
+   +'<div class="cta" data-sec="cta"><p><b>どれか近いものがあれば、お送りしたメールにひと言ご返信ください。</b><br>「2番が近い」「別の作業で困っている」など、まとまっていなくても大丈夫です。<br>最初のお試しは無料です（1つの研究室につき1回、案に書いた量まで）。</p>'
    +'<a class="btn primary" data-t="mailto" href="mailto:chiba.shuta.re@gmail.com?subject='+encodeURIComponent('Re: 研究のデータ作業のお手伝いについて')+'">メールで返信する</a>'
    +'<a class="btn" data-t="works" href="./">これまで作ったものを見る</a></div>'
    +'<footer>千葉嵩太 ／ chiba.shuta.re@gmail.com<br>これは先生の公開情報（researchmap）から想像で書いた試案です。今後のご連絡が不要でしたら <a data-t="stop" href="stop.html">こちら</a>。</footer>';

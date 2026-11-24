@@ -48,7 +48,7 @@ footer{margin-top:40px;font-size:13px;color:var(--mut)}
    +'<dt>いまの手間</dt><dd>'+esc(i.now)+'</dd><dt>軽くする方法</dt><dd>'+esc(i.how)+'</dd>'
    +'<dt class="keep">先生が判断</dt><dd>'+esc(i.keep)+'</dd><dt>ご用意いただくもの</dt><dd>'+esc(i.need)+'</dd>'
    +'<dt>小さく試すなら</dt><dd>'+esc(i.size)+'</dd></dl></div>'}).join('');
-  main.innerHTML='<p class="to">'+esc(d.name)+' 先生（'+esc(d.university)+'）へ</p>'
+  main.innerHTML='<p class="to">'+esc(d.university)+'　'+esc(d.name)+' 先生</p>'
    +'<h1>'+esc(d.headline)+'</h1>'
    +'<div data-sec="understanding"><h2>先生の研究について、私が理解したこと</h2><p>'+esc(d.understanding)+'</p></div>'
    +'<h2 data-sec="ideas">お手伝いできそうな作業（3つの案）</h2>'+ideas
